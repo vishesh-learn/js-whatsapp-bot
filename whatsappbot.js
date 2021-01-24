@@ -8,9 +8,9 @@
 // @grant        none
 // ==/UserScript==
 
-var lm, message, ls;
+var lm, message, ls, targetClass = '.VOr2j';
 
-function simulateMouseEvents(element, eventName){ console.log("simulateMouseEvents");
+function simulateMouseEvents(element, eventName){ console.log("13: simulateMouseEvents");
 	var mouseEvent = document.createEvent('MouseEvents');
 
     mouseEvent.initEvent(eventName, true, true);
@@ -19,7 +19,7 @@ function simulateMouseEvents(element, eventName){ console.log("simulateMouseEven
 }
 
 function targetchat(){
-    var target = document.querySelector('._1ZMSM').parentElement.parentElement;console.log(target);
+    var target = document.querySelector(targetClass).parentElement.parentElement;//console.log("22: targetChat: "target);
     if(target){
         simulateMouseEvents(target, 'mousedown');
         //clearInterval(sI);
@@ -34,7 +34,7 @@ function evil(qry, prev){
 	var result = new Function('return ' + qry)();
 
 	if(result && result != prev){
-        console.log("qry: "+qry); console.log("reply: "+result);
+        //console.log("qry: "+qry + "\nreply: "+result);
 		return result;
     }else{
         //console.log("no-reply");
@@ -67,12 +67,12 @@ function m(){//console.log("m");
 
 function sB(){//console.log("sB");
     while(!messageBox){//console.log("no-messageBox");
-    var messageBox = document.querySelector("[contenteditable='true']");
+    var messageBox = document.querySelectorAll("[contenteditable='true']")[1];
     } //console.log("messageBox");
 
     var event = document.createEvent("UIEvents");
 
-    if(message){
+    if(message){console.log(messageBox);
     messageBox.innerHTML = message;
     }//else{console.log("no message");}
 
