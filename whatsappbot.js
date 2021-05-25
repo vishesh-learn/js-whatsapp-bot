@@ -8,7 +8,7 @@
 // @grant        none
 // ==/UserScript==
 
-var lm, message, ls, targetClass = '.VOr2j';
+var lastMessageIn, message, lastMessageOut, targetClass = '.VOr2j', messageInSelector = ".message-in span span", messageOutSelector = ".message-out span span";
 
 function simulateMouseEvents(element, eventName){ console.log("13: simulateMouseEvents");
 	var mouseEvent = document.createEvent('MouseEvents');
@@ -19,13 +19,12 @@ function simulateMouseEvents(element, eventName){ console.log("13: simulateMouse
 }
 
 function targetchat(){
-    var target = document.querySelector(targetClass).parentElement.parentElement;//console.log("22: targetChat: "target);
+    var target = document.querySelector(targetClass).parentElement.parentElement;
     if(target){
         simulateMouseEvents(target, 'mousedown');
         //clearInterval(sI);
-        //console.log("target: "+target);
     }else{
-        //console.log(target)
+        console.log("no target")
     }
 }
 
@@ -34,76 +33,55 @@ function evil(qry, prev){
 	var result = new Function('return ' + qry)();
 
 	if(result && result != prev){
-        //console.log("qry: "+qry + "\nreply: "+result);
 		return result;
     }else{
-        //console.log("no-reply");
 		return false;
     }
 }
 
-function m(){//console.log("m");
-    var mlist = document.querySelectorAll(".message-in span span");
-    var mslist = document.querySelectorAll(".message-out span span");
-    //console.log("lsent: "+mslist[mslist.length-1].innerHTML);
-    lm = mlist[mlist.length-1].innerHTML;
-    ls = mslist[mslist.length-1].innerHTML;
+function getMessage(){
+    var messageInSpanList = document.querySelectorAll(messageInSelector);
+    var messageOutSpanList = document.querySelectorAll(messageOutSelector);
+
+    lastMessageIn = messageInSpanList[messageInSpanList.length-1].innerText;
+    lastMessageOut = messageOutSpanList[messageOutSpanList.length-1].innerText;
 
 
-    if(typeof lm == "string" || typeof ls == "string"){
-    //clearInterval(mi);
-    //console.log("lm: "+lm);
-
-    message = evil(lm, ls);
-    //console.log("reply: "+message);
-
-        if(message){
-            sB();
+    if(typeof lastMessageIn == "string" || typeof lastMessageOut == "string"){
+        if(message = evil(lastMessageIn, lastMessageOut)){
+            sendMessage();
             message = "";
         }
     }
-    else{console.log("no lm or ls");}
+    else{console.log("no lastMessageIn or lastMessageOut");}
 }
 
-function sB(){//console.log("sB");
-    while(!messageBox){//console.log("no-messageBox");
-    var messageBox = document.querySelectorAll("[contenteditable='true']")[1];
-    } //console.log("messageBox");
+function sendMessage(){
+    while(!messageBox){
+    	const messageBox = document.querySelectorAll("[contenteditable='true']")[1];
+    }
 
     var event = document.createEvent("UIEvents");
 
-    if(message){console.log(messageBox);
-    messageBox.innerHTML = message;
-    }//else{console.log("no message");}
+    if(message){
+    	messageBox.innerHTML = message;
+    } else {
+		console.log("no message");
+	}
 
     event.initUIEvent("input", true, true, window, 1);
-
     messageBox.dispatchEvent(event);
 
     var sendb = document.querySelector('span[data-icon="send"]');
-    //if(sendb) console.log("sendb");
-    //else console.log("no-sendb");
 
-    var eventFire = (MyElement, ElementType) => {
-
-        var MyEvent = document.createEvent("MouseEvents");
-
+    const eventFire = (MyElement, ElementType) => {
+        const MyEvent = document.createEvent("MouseEvents");
         MyEvent.initMouseEvent(ElementType, true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-
         MyElement.dispatchEvent(MyEvent);
     };
 
 	eventFire(sendb, 'click');
 }
 
-
-//var sI = setInterval(start, 5000);
-//function start(){
-
-var tC = setInterval(targetchat, 1000);
-
-
-var mi = setInterval(m, 1000);
-
-
-//}
+setInterval(targetchat, 1000);
+setInterval(getMessage, 1000);
