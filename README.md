@@ -1,7 +1,7 @@
 # js-whatsapp-bot
 
 Discription:
-  A simple Whatsapp Bot that runs in Tampermonkey and solves simple mathematical equations received on WhatsApp Web.
+  A simple Whatsapp Bot that runs through Tampermonkey and solves simple mathematical equations received on WhatsApp Web.
 
 Suitable to work with:
   http://tampermonkey.net
