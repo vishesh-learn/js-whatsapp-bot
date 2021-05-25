@@ -1,2 +1,0 @@
-unread chat classname in sidebar : _2UaNq _2ko65;
-read chat classname in sidebar : _2UaNq;
