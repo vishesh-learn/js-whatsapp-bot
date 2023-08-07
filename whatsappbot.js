@@ -2,7 +2,7 @@
 // @name         Vatsapp Bot
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  a simple Whatsapp Bot that replies with the answer of a mathematical question asked!
+// @description  A simple Whatsapp Bot that replies with the answer of a mathematical question asked!
 // @author       Vishesh
 // @match        https://web.whatsapp.com/
 // @grant        none

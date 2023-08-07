@@ -1,12 +1,10 @@
-# js-whatsapp-bot
+# JS-WhatsApp-Bot
 
-Discription:
-  A simple Whatsapp Bot that runs through Tampermonkey and solves simple mathematical equations received on WhatsApp Web.
+## Disclaimer
+Please note that this repository is no longer being maintained.
 
-Suitable to work with:
-  http://tampermonkey.net
-  
-Made for:
-  https://web.whatsapp.com
-  
-It is made to work with Tampermonkey but can be used without it too.
+## Description
+This is a simple WhatsApp Bot that runs through Tampermonkey and can solve simple mathematical equations received on WhatsApp Web.
+
+## Compatibility
+This bot is designed to work with Tampermonkey and WhatsApp Web. However, it can also be used without Tampermonkey.
